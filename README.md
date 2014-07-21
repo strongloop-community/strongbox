@@ -8,10 +8,10 @@ Linux VMs for testing:
 
 # Usage
 
- # Install VirtualBox: https://www.virtualbox.org/wiki/Downloads
- # Install Vagrant: http://www.vagrantup.com/downloads.html
- # `git clone git@github.com:strongloop-internal/strongbox.git`
- # `cd strongbox`
- # `vagrant up <name>`
- # `vagrant ssh`
- # Your're in! You've got node, npm, gcc, and vim. The world is your oyster!
+ 1. Install VirtualBox: https://www.virtualbox.org/wiki/Downloads
+ 2. Install Vagrant: http://www.vagrantup.com/downloads.html
+ 3. `git clone git@github.com:strongloop-internal/strongbox.git`
+ 4. `cd strongbox`
+ 5. `vagrant up <name>`
+ 6. `vagrant ssh`
+ 7. Your're in! You've got node, npm, gcc, and vim. The world is your oyster!
