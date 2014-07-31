@@ -32,7 +32,7 @@ SCRIPT
 
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
-  config.vm.define "ubuntu1404" do |ubuntu|
+  config.vm.define "ubuntu1404", primary: true do |ubuntu|
     ubuntu.vm.box = "ubuntu/trusty64"
     ubuntu.vm.provision "shell", inline: $apt_bootstrap
   end
