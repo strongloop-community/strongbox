@@ -43,7 +43,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   end
 
   config.vm.define "centos65" do |centos|
-    centos.vm.box = "box-cutter/centos65"
+    centos.vm.box = "chef/centos-6.5"
     centos.vm.provision "shell", inline: $yum_bootstrap
   end
 
