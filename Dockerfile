@@ -6,10 +6,9 @@ RUN DEBIAN_FRONTEND=noninteractive sh -c '( \
     )' > /dev/null
 
 # Create "strongbox" user
-RUN useradd -ms /bin/bash strongbox && chown -R strongbox /usr/local
-
-# Let everyone run sudo without a password (dangerous!)
-RUN echo "ALL	ALL = (ALL) NOPASSWD: ALL" >> /etc/sudoers
+# # Let everyone run sudo without a password (dangerous!)
+RUN useradd -ms /bin/bash strongbox && chown -R strongbox /usr/local \
+    && echo "ALL	ALL = (ALL) NOPASSWD: ALL" >> /etc/sudoers
 
 # Set up some semblance of an environment
 WORKDIR /home/strongbox
