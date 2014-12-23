@@ -2,10 +2,8 @@ FROM ubuntu:latest
 
 # Get up to date, install the bare necessities
 RUN DEBIAN_FRONTEND=noninteractive sh -c '( \
-    apt-get update -q && \
-    apt-get dist-upgrade -y -q && \
-    apt-get install -y -q curl wget vim man-db ssh bash-completion )' \
-    > /dev/null
+    apt-get install -y -q curl wget vim man-db ssh bash-completion \
+    )' > /dev/null
 
 # Create "strongbox" user
 RUN useradd -ms /bin/bash strongbox && chown -R strongbox /usr/local
