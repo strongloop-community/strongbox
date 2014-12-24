@@ -47,6 +47,11 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     centos.vm.provision "shell", inline: $yum_bootstrap
   end
 
+  config.vm.define "centos7" do |centos|
+    centos.vm.box = "chef/centos-7.0"
+    centos.vm.provision "shell", inline: $yum_bootstrap
+  end
+
   # Install the latest node stable
   config.vm.provision "shell", inline: $install_node
 
