@@ -42,8 +42,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     ubuntu.vm.provision "shell", inline: $apt_bootstrap
   end
 
-  config.vm.define "centos65" do |centos|
-    centos.vm.box = "chef/centos-6.5"
+  config.vm.define "centos6" do |centos|
+    centos.vm.box = "chef/centos-6.6"
     centos.vm.provision "shell", inline: $yum_bootstrap
   end
 
