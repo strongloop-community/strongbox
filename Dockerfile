@@ -6,7 +6,7 @@ FROM ubuntu:latest
 RUN DEBIAN_FRONTEND=noninteractive sh -c '( \
         apt-get update -q && \
         apt-get dist-upgrade -y -q && \
-        apt-get install -y -q curl wget vim man-db ssh bash-completion && \
+        apt-get install -y -q curl wget vim man-db ssh-client bash-completion && \
         apt-get clean \
     )' > /dev/null && \
     useradd -ms /bin/bash strongbox && \
