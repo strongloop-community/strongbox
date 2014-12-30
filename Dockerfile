@@ -2,8 +2,9 @@ FROM ubuntu:latest
 
 # Get up to date, install the bare necessities
 RUN DEBIAN_FRONTEND=noninteractive sh -c '( \
-    apt-get install -y -q curl wget vim man-db ssh bash-completion \
-    )' > /dev/null
+    apt-get install -y -q curl wget vim man-db ssh bash-completion && \
+    apt-get clean )' \
+    > /dev/null
 
 # Create "strongbox" user
 # # Let everyone run sudo without a password (dangerous!)
