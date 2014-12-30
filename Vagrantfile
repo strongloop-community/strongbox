@@ -21,7 +21,7 @@ SCRIPT
 
 $install_node = <<-SCRIPT
   which node && exit
-  curl -s http://nodejs.org/dist/v0.10.33/node-v0.10.33-linux-x64.tar.gz | \
+  curl -s http://nodejs.org/dist/v0.10.35/node-v0.10.35-linux-x64.tar.gz | \
     tar -C /usr/local --strip-components 1 -xz -f -
   chown -R vagrant /usr/local
 SCRIPT
