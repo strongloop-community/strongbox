@@ -1,6 +1,6 @@
 all:
-	docker build -t strongbox:ubuntu .
-	docker build -t strongbox:node node
-	docker build -t strongbox:dev dev
+	docker build -t strongloop/strongbox:ubuntu .
+	docker build -t strongloop/strongbox:node node
+	docker build -t strongloop/strongbox:dev dev
 
 .PHONY: all

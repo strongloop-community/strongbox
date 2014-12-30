@@ -8,16 +8,16 @@ Linux VMs for testing:
 
 Docker images for disposable dev/test environments:
 
- * strongbox:ubuntu (bare Ubuntu 14.04 + vim, ssh, man pages + user shell)
- * strongbox:node (strongbox:ubuntu + node from tarball)
- * strongbox:dev (strongbox:node + git, compilers)
+ * strongloop/strongbox:ubuntu (bare Ubuntu 14.04 + vim, ssh, man pages + user shell)
+ * strongloop/strongbox:node (strongloop/strongbox:ubuntu + node from tarball)
+ * strongloop/strongbox:dev (strongloop/strongbox:node + git, compilers)
 
 If you are on a Mac you're using boot2docker for Docker support. You'll find
 this useful to put into your `~/.bashrc`:
 
 ```sh
 for tag in $(docker images | awk '/strongbox/ { print $2 }'); do
-    alias strongbox-$tag="boot2docker ssh -t docker run -it -v \\\$SSH_AUTH_SOCK:/ssh-agent -e SSH_AUTH_SOCK=/ssh-agent strongbox:$tag"
+    alias strongbox-$tag="boot2docker ssh -t docker run -it -v \\\$SSH_AUTH_SOCK:/ssh-agent -e SSH_AUTH_SOCK=/ssh-agent strongloop/strongbox:$tag"
 done
 ```
 
