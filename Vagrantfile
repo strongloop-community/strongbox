@@ -21,8 +21,12 @@ SCRIPT
 
 $install_node = <<-SCRIPT
   which node && exit
-  curl -s http://nodejs.org/dist/v0.10.35/node-v0.10.35-linux-x64.tar.gz | \
+  mkdir -p /usr/local/src/node /usr/local/etc
+  curl -s http://nodejs.org/dist/v0.10.36/node-v0.10.36-linux-x64.tar.gz | \
     tar -C /usr/local --strip-components 1 -xz -f -
+  curl -s http://nodejs.org/dist/v0.10.36/node-v0.10.36.tar.gz | \
+    tar -C /usr/local/src/node --strip-components 1 -xz -f -
+  echo "nodedir = /usr/local/src/node" > /usr/local/etc/npmrc
   chown -R vagrant /usr/local
 SCRIPT
 
