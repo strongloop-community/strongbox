@@ -25,6 +25,7 @@ $install_node = <<-SCRIPT
     tar -C /usr/local/src/node --strip-components 1 -xz -f -
   echo "nodedir = /usr/local/src/node" > /usr/local/etc/npmrc
   chown -R vagrant /usr/local
+  npm install -g npm
 SCRIPT
 
 $github = <<-SCRIPT
