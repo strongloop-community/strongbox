@@ -25,6 +25,9 @@ $install_node = <<-SCRIPT
     tar -C /usr/local/src/node --strip-components 1 -xz -f -
   echo "nodedir = /usr/local/src/node" > /usr/local/etc/npmrc
   chown -R vagrant /usr/local
+SCRIPT
+
+$upgrade_npm = <<-SCRIPT
   npm install -g npm
 SCRIPT
 
@@ -56,6 +59,9 @@ Vagrant.configure("2") do |config|
 
   # Install the latest node stable
   config.vm.provision "shell", inline: $install_node
+
+  # Install the latest npm release
+  config.vm.provision "shell", inline: $upgrade_npm, privileged: false
 
   # Pre-populate github ssh public keys for seamless github access
   config.vm.provision "shell", inline: $github
