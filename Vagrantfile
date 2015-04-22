@@ -4,6 +4,7 @@
 $apt_bootstrap = <<-SCRIPT
   test -f bootstrapped.txt && exit
   apt-get update -y -qq
+  apt-get dist-upgrade -y -qq
   apt-get install -y -qq build-essential git curl vim
   touch bootstrapped.txt
 SCRIPT
