@@ -1,4 +1,4 @@
-all: docker Vagrantfile
+all: docker vagrant.box
 
 docker:
 	docker build --pull -t strongloop/strongbox:ubuntu ubuntu
