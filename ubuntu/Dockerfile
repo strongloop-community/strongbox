@@ -1,4 +1,4 @@
-FROM ubuntu:latest
+FROM ubuntu:trusty
 
 # Get up to date, install the bare necessities
 RUN DEBIAN_FRONTEND=noninteractive sh -c '( \
