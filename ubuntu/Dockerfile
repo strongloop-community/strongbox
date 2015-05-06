@@ -4,7 +4,8 @@ FROM ubuntu:latest
 RUN DEBIAN_FRONTEND=noninteractive sh -c '( \
         apt-get update && \
         apt-get install -y -q curl wget vim man-db ssh-client bash-completion && \
-        apt-get clean \
+        apt-get clean && \
+        apt-get autoclean \
     )' > /dev/null
 
 # Create "strongbox" user
