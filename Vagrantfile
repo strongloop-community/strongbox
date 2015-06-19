@@ -36,6 +36,11 @@ $github = <<-SCRIPT
   grep github.com /etc/ssh/ssh_known_hosts || ssh-keyscan github.com >> /etc/ssh/ssh_known_hosts
 SCRIPT
 
+$docker = <<-SCRIPT
+  wget -qO- https://get.docker.com/ | sh
+  usermod -a -G docker vagrant
+SCRIPT
+
 Vagrant.configure("2") do |config|
 
   config.vm.define "ubuntu1404", primary: true do |ubuntu|
@@ -66,6 +71,9 @@ Vagrant.configure("2") do |config|
 
   # Pre-populate github ssh public keys for seamless github access
   config.vm.provision "shell", inline: $github
+
+  # Install docker
+  config.vm.provision "shell", inline: $docker
 
   # Allow agent forwarding to that github works when you 'vagrant ssh'
   config.ssh.forward_agent = true

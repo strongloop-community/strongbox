@@ -13,7 +13,7 @@ vagrant.box: Vagrantfile
 	vagrant ssh ubuntu1404 -c 'rm -rf /usr/local/src/node /usr/local/etc/npmrc'
 	vagrant ssh ubuntu1404 -c 'npm install -g strongloop && npm cache clear'
 	vagrant ssh ubuntu1404 -c 'dd if=/dev/zero of=zero bs=1M; rm -f zero .bash_history'
-	vagrant ssh ubuntu1404 -c 'cat /etc/issue && node --version && npm --version && slc --version'
+	vagrant ssh ubuntu1404 -c 'cat /etc/issue && node --version && npm --version && slc --version && docker version'
 	rm -rf $@
 	vagrant package --output $@ ubuntu1404
 
