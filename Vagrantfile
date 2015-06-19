@@ -83,6 +83,7 @@ Vagrant.configure("2") do |config|
   # accessing "localhost:8080" will access port 80 on the guest machine.
   # config.vm.network "forwarded_port", guest: 80, host: 8080
   config.vm.network "forwarded_port", guest: 3000, host: 3000, auto_correct: true
+  config.vm.network "forwarded_port", guest: 3001, host: 3001, auto_correct: true
   config.vm.network "forwarded_port", guest: 8701, host: 8701, auto_correct: true
 
   # Share an additional folder to the guest VM. The first argument is
