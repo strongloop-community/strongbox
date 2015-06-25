@@ -4,6 +4,19 @@
 Vagrant.configure(2) do |config|
   config.vm.box = "chef/centos-6.6"
 
+  # install node and npm
+  config.vm.provision "shell", path: "nodejs-install.sh", privileged: false
+
+  # install strong-pm and strong-deploy
+  config.vm.provision "shell", path: "strongloop-install.sh", privileged: false
+
+  # install our app
+  config.vm.provision "shell", path: "app-install.sh", privileged: false
+
+  # our scripts configure iptables to expose its port 3001 as port 80, which we
+  # then ask Vagrant to epose as port 3080
+  config.vm.network "forwarded_port", guest: 80, host: 3080, auto_correct: true
+
   # disable shared folder
   config.vm.synced_folder ".", "/vagrant", disabled: true
 
