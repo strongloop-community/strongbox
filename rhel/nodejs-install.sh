@@ -31,34 +31,37 @@ echo "Installing node and npm in $NODE_PREFIX from $NODE_BIN"
 # Installs node, npm, man pages, and some release header files
 curl -sL $NODE_BIN | sudo tar -C $NODE_PREFIX --strip-components 1 -xzf - '*/*/*'
 
+echo "Granting user $NPM_USER write access to npm modules..."
+sudo mkdir -p $NODE_PREFIX/src/node $(npm config get prefix)/etc
+sudo touch $(npm config get globalconfig)
+sudo chown -R $NPM_USER $NODE_PREFIX/bin \
+              $NODE_PREFIX/lib/node_modules \
+              $(npm config get globalconfig)
+
 echo "Installing node source code to $NODE_PREFIX/src/node for use by node-gyp"
-sudo mkdir -p $NODE_PREFIX/src/node
 curl -sL $NODE_SRC | sudo tar -C $NODE_PREFIX/src/node --strip-components 1 -xzf -
 
 echo "Configuring npm to use local node source code for node-gyp"
 # "../etc/npmrc" relative to the npm binary is the location of the "global"
 # npmrc that is used by all users. The values override the defaults, but can be
 # overriden by values in a user's own ~/.npmrc file.
-sudo mkdir -p $NODE_PREFIX/etc
+
 # The nodedir config value points to the source you built node from so that
 # node-gyp doesn't try to download the source. This is normally used by devs
 # because the node-gyp version detection doesn't handle non-release version
 # numbers, but it is also very handy for offline scenarios.
-echo "nodedir = /usr/local/src/node" | sudo tee -a $NODE_PREFIX/etc/npmrc
+echo "nodedir = /usr/local/src/node" >> $(npm config get globalconfig)
 
 # If a private npm registry is being used, make it the global default
 if [[ -n "$NPM_REGISTRY" ]]; then
-  echo "registry = $NPM_REGISTRY" | sudo tee -a $NODE_PREFIX/etc/npmrc
+  echo "registry = $NPM_REGISTRY" >> $(npm config get globalconfig)
 fi
 
-echo "Granting user $NPM_USER write access to npm modules..."
-sudo chown -R $NPM_USER $NODE_PREFIX/bin $NODE_PREFIX/lib/node_modules
-
 echo "Installing development tools necessary for building binary addons..."
-## minimal install:
-# sudo yum -y -q install gcc-c++ make
-# full install:
-sudo yum -y -q groupinstall "Development Tools"
+# minimal install:
+sudo yum -y -q install gcc-c++ make
+# # full install:
+# sudo yum -y -q groupinstall "Development Tools"
 
 echo "Node and npm successfully installed:"
 node --version
