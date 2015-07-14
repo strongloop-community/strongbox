@@ -1,8 +1,12 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
 
-$NODE_SRC = "http://nodejs.org/dist/v0.10.40/node-v0.10.40-linux-x64.tar.gz"
-$NODE_BIN = "http://nodejs.org/dist/v0.10.40/node-v0.10.40.tar.gz"
+$INSTALL_NODE_BIN = "curl -s http://nodejs.org/dist/v0.10.40/node-v0.10.40-linux-x64.tar.gz | tar -C /usr/local --strip-components 1 -xzf-"
+$INSTALL_NODE_SRC = "curl -s http://nodejs.org/dist/v0.10.40/node-v0.10.40.tar.gz | tar -C /usr/local/src/node --strip-components 1 -xzf-"
+
+# iojs
+# $INSTALL_NODE_BIN = "curl -s https://iojs.org/dist/v2.3.4/iojs-v2.3.4-linux-x64.tar.xz | tar -C /usr/local --strip-components 1 -xJf-"
+# $INSTALL_NODE_SRC = "curl -s https://iojs.org/dist/v2.3.4/iojs-v2.3.4.tar.xz | tar -C /usr/local/src/node --strip-components 1 -xJf-"
 
 $apt_bootstrap = <<-SCRIPT
   test -f bootstrapped.txt && exit
@@ -23,13 +27,14 @@ SCRIPT
 $install_node = <<-SCRIPT
   which node && exit
   mkdir -p /usr/local/src/node /usr/local/etc
-  curl -s #{$NODE_BIN} | tar -C /usr/local --strip-components 1 -xz -f -
-  curl -s #{$NODE_SRC} | tar -C /usr/local/src/node --strip-components 1 -xz -f -
+  #{$INSTALL_NODE_BIN}
+  #{$INSTALL_NODE_SRC}
   echo "nodedir = /usr/local/src/node" > /usr/local/etc/npmrc
   chown -R vagrant /usr/local
 SCRIPT
 
 $upgrade_npm = <<-SCRIPT
+  export PATH=/usr/local/bin:$PATH
   npm install -g npm
 SCRIPT
 
@@ -39,7 +44,7 @@ SCRIPT
 
 $docker = <<-SCRIPT
   wget -qO- https://get.docker.com/ | sh
-  usermod -a -G docker vagrant
+  usermod -a -G docker vagrant || echo "cannot add user to docker group"
 SCRIPT
 
 Vagrant.configure("2") do |config|
