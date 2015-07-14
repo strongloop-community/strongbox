@@ -1,8 +1,8 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
 
-$NODE_SRC = "http://nodejs.org/dist/v0.10.39/node-v0.10.39-linux-x64.tar.gz"
-$NODE_BIN = "http://nodejs.org/dist/v0.10.39/node-v0.10.39.tar.gz"
+$NODE_SRC = "http://nodejs.org/dist/v0.10.40/node-v0.10.40-linux-x64.tar.gz"
+$NODE_BIN = "http://nodejs.org/dist/v0.10.40/node-v0.10.40.tar.gz"
 
 $apt_bootstrap = <<-SCRIPT
   test -f bootstrapped.txt && exit

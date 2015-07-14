@@ -12,8 +12,8 @@ NODE_PREFIX=${NODE_PREFIX:-/usr/local}
 
 # If you have a restricted network you would probably mirror these URLs on a
 # local repository like Artifactory or Nexus or even just a plain http server.
-NODE_BIN=${NODE_BIN:-http://nodejs.org/dist/v0.10.39/node-v0.10.39-linux-x64.tar.gz}
-NODE_SRC=${NODE_SRC:-http://nodejs.org/dist/v0.10.39/node-v0.10.39.tar.gz}
+NODE_BIN=${NODE_BIN:-http://nodejs.org/dist/v0.10.40/node-v0.10.40-linux-x64.tar.gz}
+NODE_SRC=${NODE_SRC:-http://nodejs.org/dist/v0.10.40/node-v0.10.40.tar.gz}
 
 # Place holder for if we want to use a local/private npm registry instead of
 # the default public registry.
