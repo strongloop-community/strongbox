@@ -41,7 +41,7 @@ $upgrade_npm = <<-SCRIPT
 SCRIPT
 
 $github = <<-SCRIPT
-  grep github.com /etc/ssh/ssh_known_hosts || ssh-keyscan github.com >> /etc/ssh/ssh_known_hosts
+  grep github.com /etc/ssh/ssh_known_hosts || ssh-keyscan github.com >> /etc/ssh/ssh_known_hosts 2>/dev/null
 SCRIPT
 
 $docker = <<-SCRIPT
@@ -81,7 +81,7 @@ Vagrant.configure("2") do |config|
   config.vm.provision "shell", inline: $github
 
   # Install docker
-  config.vm.provision "shell", inline: $docker
+  #config.vm.provision "shell", inline: $docker
 
   # Allow agent forwarding to that github works when you 'vagrant ssh'
   config.ssh.forward_agent = true
@@ -105,7 +105,7 @@ Vagrant.configure("2") do |config|
   config.vm.provider "virtualbox" do |vb|
     # default is 1 cpu, 512MB of RAM
     # 512 is sufficient for intended usage
-    # vb.memory = 1024
+    vb.memory = 2048
     # 2 cpus allows proper node clustering
     vb.cpus = 2
   end

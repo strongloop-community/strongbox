@@ -10,9 +10,19 @@ vagrant.box: Vagrantfile
 	vagrant up ubuntu1404
 	# reboot, to make sure we have the latest kernel
 	vagrant reload ubuntu1404
-	vagrant ssh ubuntu1404 -c 'sudo apt-get purge -y linux-.*-3.13.0-54-.* libx11-.* xfonts-.*'
-	vagrant ssh ubuntu1404 -c 'sudo apt-get -y autoremove; sudo apt-get autoclean'
-	vagrant ssh ubuntu1404 -c 'sudo rm -rf /var/lib/apt/lists/* boostrapped.txt'
+	vagrant ssh ubuntu1404 -c 'sudo -n apt-get purge -y linux-.*-3.13.0-5[45]-.* libx11-.* xfonts-.*'
+	vagrant ssh ubuntu1404 -c 'wget http://download.virtualbox.org/virtualbox/5.0.0/VBoxGuestAdditions_5.0.0.iso'
+	vagrant ssh ubuntu1404 -c 'sudo -n mkdir /media/VBoxGuestAdditions'
+	vagrant ssh ubuntu1404 -c 'sudo -n mount -o loop,ro VBoxGuestAdditions_5.0.0.iso /media/VBoxGuestAdditions'
+	vagrant ssh ubuntu1404 -c 'sudo -n /media/VBoxGuestAdditions/VBoxLinuxAdditions.run --nox11 -- --force'
+	vagrant ssh ubuntu1404 -c 'sudo -n umount /media/VBoxGuestAdditions'
+	vagrant ssh ubuntu1404 -c 'rm VBoxGuestAdditions_5.0.0.iso'
+	vagrant ssh ubuntu1404 -c 'sudo -n rmdir /media/VBoxGuestAdditions'
+	vagrant ssh ubuntu1404 -c 'wget -qO- https://get.docker.com/ | sudo -n sh'
+	vagrant ssh ubuntu1404 -c 'sudo -n usermod -a -G docker vagrant || echo "cannot add user to docker group"'
+	vagrant reload ubuntu1404
+	vagrant ssh ubuntu1404 -c 'sudo -n apt-get -y autoremove; sudo -n apt-get autoclean'
+	vagrant ssh ubuntu1404 -c 'sudo -n rm -rf /var/lib/apt/lists/* boostrapped.txt'
 	vagrant ssh ubuntu1404 -c 'npm install -g strongloop && npm cache clear'
 	vagrant ssh ubuntu1404 -c 'dd if=/dev/zero of=zero bs=1M; rm -f zero .bash_history'
 	vagrant ssh ubuntu1404 -c 'cat /etc/issue && node --version && npm --version && slc --version && docker version'
