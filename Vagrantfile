@@ -29,6 +29,8 @@ $install_node = <<-SCRIPT
   mkdir -p /usr/local/src/node /usr/local/etc
   #{$INSTALL_NODE_BIN}
   #{$INSTALL_NODE_SRC}
+  # node-gyp doesn't need anything except the .h and .gypi files, so we can save 80MB+ here
+  find /usr/local/src/node -not -name '*.h' -a -not -name '*.gypi' -a -not -type d -delete
   echo "nodedir = /usr/local/src/node" > /usr/local/etc/npmrc
   chown -R vagrant /usr/local
 SCRIPT
