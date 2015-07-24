@@ -21,7 +21,7 @@ vagrant.box: Vagrantfile
 	vagrant ssh ubuntu1404 -c 'wget -qO- https://get.docker.com/ | sudo -n sh'
 	vagrant ssh ubuntu1404 -c 'sudo -n usermod -a -G docker vagrant || echo "cannot add user to docker group"'
 	vagrant reload ubuntu1404
-	vagrant ssh ubuntu1404 -c 'sudo -n apt-get -y autoremove; sudo -n apt-get autoclean'
+	vagrant ssh ubuntu1404 -c 'sudo -n apt-get -y autoremove; sudo -n apt-get autoclean; sudo -n apt-get clean'
 	vagrant ssh ubuntu1404 -c 'sudo -n rm -rf /var/lib/apt/lists/* boostrapped.txt'
 	vagrant ssh ubuntu1404 -c 'npm install -g strongloop && npm cache clear'
 	vagrant ssh ubuntu1404 -c 'dd if=/dev/zero of=zero bs=1M; rm -f zero .bash_history'
